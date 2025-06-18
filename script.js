@@ -28,15 +28,20 @@ form.addEventListener("submit", async (e) => {
   if (!text) return;
 
   try {
-    const res = await fetch(`${API_BASE}`, {
+    const res = await fetch(API_BASE, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, completed: false }),
     });
+
+    if (!res.ok) {
+      throw new Error("Failed to add task: " + res.status);
+    }
+
     const newTask = await res.json();
-    taskList.push(newTask);
-    renderFilteredTasks("all");
-    input.value = "";
+    taskList.push(newTask);           // Store in memory
+    renderFilteredTasks("all");       // Re-render list
+    input.value = "";                 // Clear input
   } catch (err) {
     alert("⚠️ Failed to add task.");
     console.error(err);
