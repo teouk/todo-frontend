@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000/api/todos";
+const API_BASE = "https://todo-backend-rorc.onrender.com";
 
 const form = document.getElementById("todo-form");
 const input = document.getElementById("todo-input");
